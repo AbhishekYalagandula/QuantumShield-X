@@ -2,7 +2,11 @@ import os
 import shutil
 from datetime import datetime
 
+from app.services.zip_service import extract_zip
+from app.scanner.code_scanner import scan_project
+
 UPLOAD_FOLDER = "app/uploads"
+EXTRACT_FOLDER = "app/extracted_projects"
 
 
 def save_uploaded_file(file):
@@ -24,9 +28,23 @@ def save_uploaded_file(file):
     size = os.path.getsize(file_path)
     size_mb = f"{size / (1024 * 1024):.2f} MB"
 
+    scan_results = []
+
+    # If uploaded file is a ZIP, extract and scan it
+    if filename.lower().endswith(".zip"):
+
+        project_name = os.path.splitext(filename)[0]
+
+        extract_path = os.path.join(EXTRACT_FOLDER, project_name)
+
+        extract_zip(file_path, extract_path)
+
+        scan_results = scan_project(extract_path)
+
     return {
         "status": "success",
         "filename": filename,
         "size": size_mb,
-        "message": "Project uploaded successfully."
+        "scan_results": scan_results,
+        "message": "Project uploaded and scanned successfully."
     }
