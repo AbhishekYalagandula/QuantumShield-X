@@ -4,6 +4,9 @@ from datetime import datetime
 
 from app.services.zip_service import extract_zip
 from app.scanner.code_scanner import scan_project
+from app.services.analyzer_service import analyze_scan_results
+from app.services.migration_service import generate_migration_plan
+from app.services.report_service import generate_report
 
 UPLOAD_FOLDER = "app/uploads"
 EXTRACT_FOLDER = "app/extracted_projects"
@@ -40,11 +43,20 @@ def save_uploaded_file(file):
         extract_zip(file_path, extract_path)
 
         scan_results = scan_project(extract_path)
+        analysis = analyze_scan_results(scan_results)
+        migration_plan = generate_migration_plan(analysis)
+        report = generate_report(
+    filename,
+    analysis,
+    migration_plan
+)
 
     return {
-        "status": "success",
-        "filename": filename,
-        "size": size_mb,
-        "scan_results": scan_results,
-        "message": "Project uploaded and scanned successfully."
-    }
+    "status": "success",
+    "filename": filename,
+    "size": size_mb,
+    "analysis": analysis,
+    "migration_plan": migration_plan,
+    "report": report,
+    "message": "Project uploaded, analyzed and report generated successfully."
+}

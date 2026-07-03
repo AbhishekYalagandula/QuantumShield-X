@@ -6,5 +6,7 @@ class UploadResponse(BaseModel):
     status: str
     filename: str
     size: str
-    scan_results: list[Any]
+    analysis: list
+    migration_plan: list
+    report: str
     message: str
