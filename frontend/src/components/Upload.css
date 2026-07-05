@@ -1,0 +1,55 @@
+.upload-page{
+    min-height:100vh;
+    background:#081224;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.upload-page h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.upload-page p{
+    color:#b8bfd4;
+}
+.file-card{
+    margin-top:30px;
+    background:#17213d;
+    border-radius:15px;
+    padding:20px;
+    color:white;
+    box-shadow:0 0 20px rgba(111,108,255,.2);
+}
+
+.file-card h3{
+    margin-bottom:10px;
+}
+
+.file-card p{
+    color:#9aa7d1;
+    margin-bottom:20px;
+}
+
+.scan-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+
+    background:linear-gradient(90deg,#7b61ff,#4d8dff);
+
+    transition:.3s;
+}
+
+.scan-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(111,108,255,.5);
+}

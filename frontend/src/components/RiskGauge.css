@@ -1,0 +1,56 @@
+.risk-box{
+
+    width:320px;
+
+    background:#111b33;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    color:white;
+
+    text-align:center;
+
+    box-shadow:0 0 20px rgba(111,108,255,.15);
+
+}
+
+.circle{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    border:12px solid #6f6cff;
+
+    margin:25px auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:45px;
+
+    font-weight:bold;
+
+    color:#6f6cff;
+
+     transition:0.3s ease;
+
+}
+
+.risk-box h3{
+
+    color:#faf7ef;
+
+}
+.risk-box h2{
+
+    color:#faf7ef;
+
+}

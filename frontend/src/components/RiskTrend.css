@@ -1,0 +1,26 @@
+.trend-box{
+
+    width:420px;
+
+    background:#111b33;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 0 20px rgba(111,108,255,.15);
+
+}
+
+.trend-box{
+    width: 500px;
+    height: 250px;
+
+    background:#111b33;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(111,108,255,.15);
+}
+.trend-box h2{
+    color:rgb(249, 251, 253)
+}

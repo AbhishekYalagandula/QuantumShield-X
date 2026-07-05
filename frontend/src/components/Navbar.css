@@ -1,0 +1,37 @@
+.navbar{
+
+    height:70px;
+
+    background:#111b33;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    color:white;
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#6f6cff;
+
+}
+
+.user{
+
+    font-size:18px;
+
+    color:#d9d9d9;
+
+}

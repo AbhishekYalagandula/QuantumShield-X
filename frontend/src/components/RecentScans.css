@@ -1,0 +1,65 @@
+.recent-box{
+
+    width:420px;
+
+    
+     background:#111b33;
+
+
+    border-radius:18px;
+
+    padding:25px;
+
+    color:white;
+
+    box-shadow:0 0 20px rgba(111,108,255,.15);
+
+}
+
+.recent-box h2{
+    color:white;
+}
+
+.scan-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.scan-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.high{
+
+    color:#ff5252;
+
+    font-weight:bold;
+
+}
+
+.medium{
+
+    color:#ffc107;
+
+    font-weight:bold;
+
+}
+
+.low{
+
+    color:#00e676;
+
+    font-weight:bold;
+
+}
