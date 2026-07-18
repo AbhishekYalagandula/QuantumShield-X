@@ -1,75 +1,119 @@
 # app/scanner/crypto_detector.py
 
 CRYPTO_PATTERNS = {
-    "RSA": [
-        "RSA",
-        "RSA_generate_key",
-        "RSA_public_encrypt",
-        "RSA_private_decrypt",
-        'KeyPairGenerator.getInstance("RSA")'
-    ],
+    "RSA": {
+        "patterns": [
+            "RSA",
+            "RSA_generate_key",
+            "RSA_public_encrypt",
+            "RSA_private_decrypt",
+            'KeyPairGenerator.getInstance("RSA")'
+        ],
+        "severity": "Critical",
+        "recommendation": "Replace with ML-KEM (CRYSTALS-Kyber)"
+    },
 
-    "ECC": [
-        "ECC",
-        "EC_KEY",
-        "EllipticCurve"
-    ],
+    "ECC": {
+        "patterns": [
+            "ECC",
+            "EC_KEY",
+            "EllipticCurve"
+        ],
+        "severity": "High",
+        "recommendation": "Replace with ML-DSA"
+    },
 
-    "ECDSA": [
-        "ECDSA",
-        "ECDSA_sign",
-        "ECDSA_verify"
-    ],
+    "ECDSA": {
+        "patterns": [
+            "ECDSA",
+            "ECDSA_sign",
+            "ECDSA_verify"
+        ],
+        "severity": "High",
+        "recommendation": "Replace with ML-DSA"
+    },
 
-    "DSA": [
-        "DSA",
-        "DSA_sign"
-    ],
+    "DSA": {
+        "patterns": [
+            "DSA",
+            "DSA_sign"
+        ],
+        "severity": "Medium",
+        "recommendation": "Replace with ML-DSA"
+    },
 
-    "AES": [
-        "AES",
-        "AES_encrypt",
-        "AES_decrypt"
-    ],
+    "AES": {
+        "patterns": [
+            "AES",
+            "AES_encrypt",
+            "AES_decrypt"
+        ],
+        "severity": "Safe",
+        "recommendation": "AES-256 is currently quantum resistant except for Grover's quadratic speedup."
+    },
 
-    "DES": [
-        "DES",
-        "DES_encrypt"
-    ],
+    "DES": {
+        "patterns": [
+            "DES",
+            "DES_encrypt"
+        ],
+        "severity": "Critical",
+        "recommendation": "Replace with AES-256"
+    },
 
-    "SHA-1": [
-        "SHA1",
-        "SHA-1"
-    ],
+    "SHA-1": {
+        "patterns": [
+            "SHA1",
+            "SHA-1"
+        ],
+        "severity": "High",
+        "recommendation": "Replace with SHA-256 or SHA-3"
+    },
 
-    "SHA-256": [
-        "SHA256",
-        "SHA-256"
-    ],
+    "SHA-256": {
+        "patterns": [
+            "SHA256",
+            "SHA-256"
+        ],
+        "severity": "Safe",
+        "recommendation": "Currently acceptable"
+    },
 
-    "MD5": [
-        "MD5"
-    ],
+    "MD5": {
+        "patterns": [
+            "MD5"
+        ],
+        "severity": "Critical",
+        "recommendation": "Replace with SHA-256"
+    },
 
-    "TLS": [
-        "TLS",
-        "SSL"
-    ]
+    "TLS": {
+        "patterns": [
+            "TLS",
+            "SSL"
+        ],
+        "severity": "Medium",
+        "recommendation": "Upgrade to TLS 1.3"
+    }
 }
 
 
 def detect_algorithms(file_content: str):
-    """
-    Detect cryptographic algorithms used inside source code.
-    """
 
-    detected = set()
+    findings = []
 
-    for algorithm, patterns in CRYPTO_PATTERNS.items():
+    for algorithm, details in CRYPTO_PATTERNS.items():
 
-        for pattern in patterns:
+        for pattern in details["patterns"]:
 
             if pattern.lower() in file_content.lower():
-                detected.add(algorithm)
 
-    return list(detected)
+                findings.append({
+                    "algorithm": algorithm,
+                    "severity": details["severity"],
+                    "recommendation": details["recommendation"]
+                })
+
+                break
+
+    return findings

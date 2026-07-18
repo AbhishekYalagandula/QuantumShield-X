@@ -1,0 +1,87 @@
+.scanner-page{
+    min-height:100vh;
+    background:#081326;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.scanner-card{
+    width:650px;
+    background:#101b33;
+    border-radius:18px;
+    padding:35px;
+    color:white;
+    box-shadow:0 0 20px rgba(104,89,255,.3);
+}
+
+.scanner-card h1{
+    text-align:center;
+    color:#7a6cff;
+}
+
+.scanner-card p{
+    text-align:center;
+}
+
+.file-box{
+    margin-top:25px;
+    padding:15px;
+    background:#16233f;
+    border-radius:10px;
+}
+
+.progress-section{
+    margin-top:25px;
+}
+
+.progress-bar{
+    width:100%;
+    height:14px;
+    background:#263450;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:65%;
+    height:100%;
+    background:linear-gradient(90deg,#6f6cff,#00d4ff);
+    border-radius:20px;
+    transition: width .15s linear;
+}
+
+.progress-section span{
+    display:block;
+    text-align:right;
+    margin-top:8px;
+    color:#6f6cff;
+    font-weight:bold;
+}
+
+.scan-status{
+    margin-top:30px;
+    background:#16233f;
+    border-radius:12px;
+    padding:20px;
+}
+
+.scan-status p{
+    text-align:left;
+    margin:12px 0;
+}
+
+.current-file{
+    margin-top:25px;
+    background:#16233f;
+    border-radius:12px;
+    padding:20px;
+}
+
+.current-file h3{
+    color:#7a6cff;
+}
+
+.current-file p{
+    text-align:left;
+}
