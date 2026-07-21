@@ -1,3 +1,5 @@
+import { Routes, Route } from "react-router-dom";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Upload from "./pages/Upload";
@@ -9,6 +11,7 @@ import AIRecommendation from "./pages/AIRecommendation";
 import MigrationPlanner from "./pages/MigrationPlanner";
 import Settings from "./pages/Settings";
 import RiskReport from "./pages/RiskReport";
+
 function App() {
   return (
     <Routes>

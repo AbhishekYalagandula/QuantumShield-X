@@ -1,0 +1,207 @@
+/* ===========================================================
+                    STATUS SECTION
+=========================================================== */
+
+.risk-status{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.status-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 18px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:14px;
+
+}
+
+.status-item:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(108,99,255,.08);
+
+    border-color:rgba(108,99,255,.25);
+
+}
+
+.status-label{
+
+    color:var(--text-secondary);
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+.status-item strong{
+
+    color:var(--text-primary);
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
+
+/* ===========================================================
+                    FOOTER
+=========================================================== */
+
+.risk-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-top:auto;
+
+}
+
+.risk-indicator{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+}
+
+.indicator-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:0 0 12px #22c55e;
+
+    animation:pulse 1.6s infinite;
+
+}
+
+.risk-btn{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#fff;
+
+    background:linear-gradient(135deg,#6C63FF,#3B82F6);
+
+    transition:.3s;
+
+}
+
+.risk-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px rgba(108,99,255,.35);
+
+}
+
+/* ===========================================================
+                    ANIMATION
+=========================================================== */
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(.9);
+
+        opacity:.6;
+
+    }
+
+    50%{
+
+        transform:scale(1.2);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:scale(.9);
+
+        opacity:.6;
+
+    }
+
+}
+
+/* ===========================================================
+                    RESPONSIVE
+=========================================================== */
+
+@media(max-width:768px){
+
+    .risk-gauge-card{
+
+        min-height:auto;
+
+        padding:22px;
+
+    }
+
+    .gauge-content h1{
+
+        font-size:40px;
+
+    }
+
+    .risk-footer{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .risk-btn{
+
+        width:100%;
+
+    }
+
+}

@@ -1,0 +1,555 @@
+/* ==========================================================
+   QUANTUMSHIELD-X ENTERPRISE NAVBAR
+========================================================== */
+
+.navbar{
+
+    height:var(--navbar-height);
+
+    margin-left:var(--sidebar-width);
+
+    background:rgba(16,26,44,.95);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid var(--border-color);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 32px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:var(--z-navbar);
+
+    transition:var(--transition);
+
+}
+
+/* ===================================
+        LEFT
+=================================== */
+
+.navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.navbar-left h1{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+    margin-bottom:4px;
+
+}
+
+.navbar-left p{
+
+    font-size:14px;
+
+    color:var(--text-muted);
+
+}
+
+/* ===================================
+        SEARCH
+=================================== */
+
+.navbar-search{
+
+    width:420px;
+
+    height:52px;
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 18px;
+
+    transition:var(--transition);
+
+}
+
+.navbar-search:hover{
+
+    border-color:var(--primary);
+
+    box-shadow:var(--shadow-primary);
+
+}
+
+.search-icon{
+
+    font-size:22px;
+
+    color:var(--text-muted);
+
+    margin-right:12px;
+
+}
+
+.navbar-search input{
+
+    flex:1;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.navbar-search input::placeholder{
+
+    color:var(--text-muted);
+
+}
+/* ===================================
+        RIGHT SECTION
+=================================== */
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/* ===================================
+        DATE CARD
+=================================== */
+
+.navbar-date{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+    transition:var(--transition);
+
+}
+
+.navbar-date:hover{
+
+    border-color:var(--primary);
+
+    color:white;
+
+}
+
+.navbar-date svg{
+
+    color:var(--primary);
+
+    font-size:18px;
+
+}
+
+/* ===================================
+        NOTIFICATION BUTTON
+=================================== */
+
+.notification-btn{
+
+    position:relative;
+
+    width:50px;
+
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    color:white;
+
+    font-size:24px;
+
+    transition:var(--transition);
+
+}
+
+.notification-btn:hover{
+
+    background:var(--primary);
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-primary);
+
+}
+
+.notification-count{
+
+    position:absolute;
+
+    top:8px;
+
+    right:8px;
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    background:var(--danger);
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:2px solid var(--bg-secondary);
+
+}
+
+/* ===================================
+        PROFILE
+=================================== */
+
+.navbar-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:10px 16px;
+
+    border-radius:18px;
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    transition:var(--transition);
+
+}
+
+.navbar-profile:hover{
+
+    border-color:var(--primary);
+
+    box-shadow:var(--shadow-primary);
+
+}
+
+.profile-info{
+
+    text-align:right;
+
+}
+
+.profile-info h4{
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.profile-info span{
+
+    color:var(--text-muted);
+
+    font-size:13px;
+
+    display:block;
+
+    margin-top:3px;
+
+}
+
+.profile-avatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:18px;
+
+    box-shadow:var(--shadow-primary);
+
+}
+/* ===================================
+        ANIMATIONS
+=================================== */
+
+.navbar-search,
+.notification-btn,
+.navbar-profile,
+.navbar-date{
+
+    transition:all .35s ease;
+
+}
+
+.navbar-profile:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.notification-btn:hover svg{
+
+    animation:ringBell .6s ease;
+
+}
+
+@keyframes ringBell{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:rotate(18deg);
+
+    }
+
+    50%{
+
+        transform:rotate(-18deg);
+
+    }
+
+    75%{
+
+        transform:rotate(10deg);
+
+    }
+
+    100%{
+
+        transform:rotate(0deg);
+
+    }
+
+}
+
+/* ===================================
+        RESPONSIVE
+=================================== */
+
+@media(max-width:1400px){
+
+    .navbar-search{
+
+        width:340px;
+
+    }
+
+}
+
+@media(max-width:1200px){
+
+    .navbar{
+
+        padding:0 24px;
+
+    }
+
+    .navbar-search{
+
+        width:280px;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .navbar{
+
+        margin-left:90px;
+
+        padding:0 20px;
+
+        gap:16px;
+
+    }
+
+    .navbar-search{
+
+        width:220px;
+
+    }
+
+    .navbar-date{
+
+        display:none;
+
+    }
+
+    .profile-info{
+
+        display:none;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .navbar{
+
+        height:auto;
+
+        padding:18px;
+
+        flex-wrap:wrap;
+
+    }
+
+    .navbar-left{
+
+        width:100%;
+
+    }
+
+    .navbar-search{
+
+        order:3;
+
+        width:100%;
+
+        margin-top:18px;
+
+    }
+
+    .navbar-right{
+
+        margin-left:auto;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .navbar{
+
+        margin-left:80px;
+
+    }
+
+    .navbar-left h1{
+
+        font-size:24px;
+
+    }
+
+    .navbar-left p{
+
+        font-size:12px;
+
+    }
+
+    .notification-btn{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+    .profile-avatar{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+}
+
+/* ===================================
+        ACCESSIBILITY
+=================================== */
+
+button:focus-visible,
+input:focus-visible{
+
+    outline:2px solid var(--primary);
+
+    outline-offset:2px;
+
+}

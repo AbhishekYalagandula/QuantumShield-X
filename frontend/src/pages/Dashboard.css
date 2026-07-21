@@ -1,121 +1,324 @@
+/* ===========================================================
+                    DASHBOARD PAGE
+=========================================================== */
+
 .dashboard{
 
-display:flex;
+    margin-left:270px;
 
-background:#071224;
+    margin-top:80px;
 
-min-height:100vh;
+    min-height:calc(100vh - 80px);
 
-}
+    background:var(--bg-primary);
 
-.main-content{
+    padding:32px;
 
-flex:1;
+    display:flex;
 
-margin-left:250px;
+    flex-direction:column;
 
-display:flex;
+    gap:32px;
 
-flex-direction:column;
-
-}
-
-.dashboard-container{
-
-padding:30px;
-
-max-width:1500px;
-
-width:100%;
-
-margin:auto;
+    animation:dashboardFade .6s ease;
 
 }
 
-.welcome{
+/* ===========================================================
+                    PAGE HEADER
+=========================================================== */
 
-margin-bottom:30px;
+.dashboard-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+.dashboard-header h1{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+    letter-spacing:.4px;
 
 }
 
-.welcome h1{
+.dashboard-header p{
 
-color:white;
+    margin-top:10px;
 
-font-size:34px;
+    font-size:16px;
 
-font-weight:700;
+    color:var(--text-muted);
 
-}
+    max-width:720px;
 
-.welcome p{
-
-margin-top:8px;
-
-color:#94a3b8;
+    line-height:1.7;
 
 }
+
+/* ===========================================================
+                    STATS GRID
+=========================================================== */
 
 .stats-grid{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(4,1fr);
 
-gap:22px;
-
-margin-bottom:25px;
+    gap:24px;
 
 }
 
-.overview-grid{
+/* ===========================================================
+                    ANALYTICS GRID
+=========================================================== */
 
-display:grid;
+.analytics-grid{
 
-grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+    display:grid;
 
-gap:22px;
+    grid-template-columns:1.1fr 2fr;
 
-margin-bottom:25px;
+    gap:24px;
 
-align-items:start;
+    align-items:stretch;
 
 }
+
+.analytics-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.analytics-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ===========================================================
+                    BOTTOM GRID
+=========================================================== */
 
 .bottom-grid{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:2fr 1fr;
+    grid-template-columns:2fr 1fr;
 
-gap:22px;
+    gap:24px;
 
-align-items:start;
+}
+
+.bottom-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.bottom-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+/* ===========================================================
+                    RESPONSIVE
+=========================================================== */
+
+@media(max-width:1500px){
+
+    .stats-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
 
 }
 
 @media(max-width:1200px){
 
-.bottom-grid{
+    .analytics-grid{
 
-grid-template-columns:1fr;
+        grid-template-columns:1fr;
 
-}
+    }
 
-}
+    .bottom-grid{
 
-@media(max-width:900px){
+        grid-template-columns:1fr;
 
-.main-content{
-
-margin-left:0;
+    }
 
 }
 
-.overview-grid{
+@media(max-width:992px){
 
-grid-template-columns:1fr;
+    .dashboard{
+
+        margin-left:0;
+
+        padding:24px;
+
+    }
 
 }
+
+@media(max-width:768px){
+
+    .dashboard{
+
+        padding:20px;
+
+        gap:20px;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .dashboard-header h1{
+
+        font-size:28px;
+
+    }
+
+    .dashboard-header p{
+
+        font-size:15px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .dashboard{
+
+        padding:16px;
+
+    }
+
+}
+/* ===========================================================
+                    PAGE ANIMATION
+=========================================================== */
+
+@keyframes dashboardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================================================
+                    COMMON CARD WRAPPER
+=========================================================== */
+
+.analytics-left,
+.analytics-right,
+.bottom-left,
+.bottom-right{
+
+    width:100%;
+
+}
+
+/* ===========================================================
+                    CUSTOM SCROLLBAR
+=========================================================== */
+
+.dashboard::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.dashboard::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+.dashboard::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* ===========================================================
+                    SELECTION
+=========================================================== */
+
+.dashboard ::selection{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ===========================================================
+                    SMOOTH TRANSITIONS
+=========================================================== */
+
+.dashboard *{
+
+    transition:
+
+        background .3s,
+
+        color .3s,
+
+        border-color .3s,
+
+        transform .3s,
+
+        box-shadow .3s;
 
 }

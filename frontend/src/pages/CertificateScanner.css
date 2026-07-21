@@ -1,0 +1,368 @@
+/* ==========================================
+        CERTIFICATE PAGE
+========================================== */
+
+.certificate-page{
+
+    margin-left:280px;
+
+    padding:32px;
+
+    min-height:100vh;
+
+    background:var(--bg-primary);
+
+}
+
+.certificate-header{
+
+    margin-bottom:32px;
+
+}
+
+.certificate-header h1{
+
+    font-size:34px;
+
+    color:var(--text-primary);
+
+    margin-bottom:10px;
+
+}
+
+.certificate-header p{
+
+    color:var(--text-muted);
+
+    font-size:16px;
+
+}
+
+/* ==========================================
+        MAIN CARD
+========================================== */
+
+.certificate-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-color);
+
+    border-radius:24px;
+
+    padding:32px;
+
+    box-shadow:var(--shadow-primary);
+
+}
+
+/* ==========================================
+        TOP SECTION
+========================================== */
+
+.certificate-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    margin-bottom:35px;
+
+}
+
+.certificate-icon{
+
+    width:82px;
+
+    height:82px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:#ffffff;
+
+    font-size:42px;
+
+}
+
+.certificate-top h2{
+
+    color:var(--text-primary);
+
+    margin-bottom:8px;
+
+}
+
+.certificate-top p{
+
+    color:var(--text-muted);
+
+    line-height:1.7;
+
+}
+
+/* ==========================================
+        GRID
+========================================== */
+
+.certificate-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+    margin-bottom:35px;
+
+}
+
+.certificate-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:22px;
+
+    background:var(--bg-secondary);
+
+    border:1px solid var(--border-color);
+
+    border-radius:18px;
+
+    transition:var(--transition);
+
+}
+
+.certificate-item:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--primary);
+
+}
+
+.cert-icon{
+
+    font-size:34px;
+
+    color:var(--primary);
+
+}
+
+.warning{
+
+    color:#f59e0b;
+
+}
+
+.success{
+
+    color:#22c55e;
+
+}
+
+.certificate-item h3{
+
+    color:var(--text-primary);
+
+    margin-bottom:6px;
+
+}
+
+.certificate-item p{
+
+    color:var(--text-muted);
+
+}
+/* ==========================================
+        AI RECOMMENDATION
+========================================== */
+
+.recommendation-card{
+
+    margin-bottom:32px;
+
+    padding:28px;
+
+    background:rgba(79,70,229,.08);
+
+    border:1px solid rgba(79,70,229,.20);
+
+    border-radius:20px;
+
+}
+
+.recommendation-card h2{
+
+    color:var(--text-primary);
+
+    margin-bottom:14px;
+
+    font-size:24px;
+
+}
+
+.recommendation-card p{
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+.recommendation-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    background:var(--bg-secondary);
+
+    border:1px solid var(--border-color);
+
+}
+
+.recommendation-box strong{
+
+    color:var(--primary);
+
+    font-size:17px;
+
+}
+
+.recommendation-box span{
+
+    color:var(--text-muted);
+
+    line-height:1.8;
+
+}
+
+/* ==========================================
+        SECURITY SCORE
+========================================== */
+
+.certificate-score{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+.score-card{
+
+    text-align:center;
+
+    padding:26px;
+
+    border-radius:20px;
+
+    background:var(--bg-secondary);
+
+    border:1px solid var(--border-color);
+
+    transition:var(--transition);
+
+}
+
+.score-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:var(--primary);
+
+}
+
+.score-card h3{
+
+    color:var(--text-secondary);
+
+    margin-bottom:14px;
+
+    font-size:17px;
+
+}
+
+.score-card h1{
+
+    color:var(--primary);
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+        RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    .certificate-page{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+    .certificate-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .certificate-score{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .certificate-card{
+
+        padding:22px;
+
+    }
+
+    .certificate-top{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+}

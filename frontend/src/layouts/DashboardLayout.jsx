@@ -1,21 +1,37 @@
 import "./DashboardLayout.css";
 
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
 
 function DashboardLayout({ children }) {
 
     return (
 
-        <div className="layout">
+        <div className="dashboard-layout">
 
-            <Sidebar />
+            {/* Sidebar */}
 
-            <div className="layout-main">
+            <aside className="dashboard-sidebar">
 
-                <Navbar />
+                <Sidebar />
 
-                <main className="layout-content">
+            </aside>
+
+            {/* Main Content */}
+
+            <div className="dashboard-main">
+
+                {/* Navbar */}
+
+                <header className="dashboard-navbar">
+
+                    <Navbar />
+
+                </header>
+
+                {/* Page */}
+
+                <main className="dashboard-content">
 
                     {children}
 

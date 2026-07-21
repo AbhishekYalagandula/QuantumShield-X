@@ -1,0 +1,347 @@
+/* ===========================================================
+                    QUICK ACTIONS CARD
+=========================================================== */
+
+.quick-card{
+
+    background:#111c38;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+.quick-header{
+
+    margin-bottom:10px;
+
+}
+
+.quick-header h2{
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.quick-header p{
+
+    color:#93a4cf;
+
+    font-size:14px;
+
+}
+
+/* ===========================================================
+                    ACTION GRID
+=========================================================== */
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+/* ===========================================================
+                    ACTION CARD
+=========================================================== */
+
+.action-card{
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#16264a;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    transition:.35s;
+
+    color:white;
+
+    text-align:left;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.action-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.35);
+
+}
+
+.action-icon{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    color:white;
+
+}
+
+.action-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.action-content h3{
+
+    font-size:17px;
+
+    font-weight:700;
+
+}
+
+.action-content span{
+
+    font-size:13px;
+
+    color:#9bb0d8;
+
+}
+
+/* ===========================================================
+                    COLORS
+=========================================================== */
+
+.blue .action-icon{
+
+    background:#2563eb;
+
+}
+
+.purple .action-icon{
+
+    background:#7c3aed;
+
+}
+
+.red .action-icon{
+
+    background:#ef4444;
+
+}
+
+.green .action-icon{
+
+    background:#22c55e;
+
+}
+
+.orange .action-icon{
+
+    background:#f59e0b;
+
+}
+
+.cyan .action-icon{
+
+    background:#06b6d4;
+
+}
+
+.action-card.blue:hover{
+
+    border-color:#2563eb;
+
+}
+
+.action-card.purple:hover{
+
+    border-color:#7c3aed;
+
+}
+
+.action-card.red:hover{
+
+    border-color:#ef4444;
+
+}
+
+.action-card.green:hover{
+
+    border-color:#22c55e;
+
+}
+
+.action-card.orange:hover{
+
+    border-color:#f59e0b;
+
+}
+
+.action-card.cyan:hover{
+
+    border-color:#06b6d4;
+
+}
+/* ===========================================================
+                    FOOTER
+=========================================================== */
+
+.quick-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:12px;
+
+    padding-top:22px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.quick-footer span{
+
+    color:#8fa4d3;
+
+    font-size:14px;
+
+}
+
+.workflow-btn{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 22px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#6C63FF,#3B82F6);
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:14px;
+
+    transition:.35s;
+
+}
+
+.workflow-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 30px rgba(108,99,255,.35);
+
+}
+
+/* ===========================================================
+                    RESPONSIVE
+=========================================================== */
+
+@media(max-width:992px){
+
+    .quick-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .quick-footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+    .workflow-btn{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .quick-card{
+
+        padding:22px;
+
+    }
+
+    .action-card{
+
+        padding:18px;
+
+    }
+
+    .action-icon{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:24px;
+
+    }
+
+    .action-content h3{
+
+        font-size:16px;
+
+    }
+
+}
