@@ -3,7 +3,10 @@ import "./RiskGauge.css";
 function RiskGauge({
 
     score = 74,
-    risk = "Medium"
+    risk = "Medium",
+    pqc = 0,
+    vulnerable = 0,
+    migration = 0
 
 }) {
 
@@ -113,7 +116,7 @@ function RiskGauge({
 
         </span>
 
-        <strong>68%</strong>
+        <strong>{pqc}%</strong>
 
     </div>
 
@@ -125,7 +128,7 @@ function RiskGauge({
 
         </span>
 
-        <strong>12</strong>
+        <strong>{vulnerable}</strong>
 
     </div>
 
@@ -137,7 +140,7 @@ function RiskGauge({
 
         </span>
 
-        <strong>41%</strong>
+        <strong>{migration}%</strong>
 
     </div>
 

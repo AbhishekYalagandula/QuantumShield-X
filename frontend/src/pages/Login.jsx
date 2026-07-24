@@ -1,6 +1,10 @@
 import "./Login.css";
 
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 import {
 
@@ -18,16 +22,85 @@ function Login(){
 
     const navigate = useNavigate();
 
-    const handleLogin = () => {
+    const [email,setEmail] = useState("");
 
-        navigate("/dashboard");
+    const [password,setPassword] = useState("");
+
+    const [loading,setLoading] = useState(false);
+
+    const [error,setError] = useState("");
+
+    const handleLogin = async () => {
+
+        setLoading(true);
+
+        setError("");
+
+        try{
+
+            const response = await axios.post(
+
+                "http://127.0.0.1:8000/auth/login",
+
+                {
+
+                    email,
+
+                    password
+
+                }
+
+            );
+
+            localStorage.setItem(
+
+                "token",
+
+                response.data.access_token
+
+            );
+
+            navigate("/dashboard");
+
+        }
+
+        catch(err){
+
+            if(err.response){
+
+                setError(
+
+                    err.response.data.detail
+
+                );
+
+            }
+
+            else{
+
+                setError(
+
+                    "Unable to connect to QuantumShield-X Server."
+
+                );
+
+            }
+
+        }
+
+        finally{
+
+            setLoading(false);
+
+        }
 
     };
 
     return(
 
         <div className="login-page">
-                        <div className="login-left">
+
+            <div className="login-left">
 
                 <div className="brand">
 
@@ -61,7 +134,7 @@ function Login(){
 
                     <p>
 
-                        Analyze vulnerable cryptographic algorithms, receive AI-powered migration recommendations, and secure your applications with post-quantum cryptography.
+                        Analyze vulnerable cryptographic algorithms, receive AI-powered migration recommendations and secure enterprise applications against future quantum attacks.
 
                     </p>
 
@@ -73,7 +146,11 @@ function Login(){
 
                         <MdSecurity/>
 
-                        <span>Quantum Risk Detection</span>
+                        <span>
+
+                            Quantum Risk Detection
+
+                        </span>
 
                     </div>
 
@@ -81,7 +158,11 @@ function Login(){
 
                         <MdSecurity/>
 
-                        <span>AI Migration Recommendations</span>
+                        <span>
+
+                            AI Migration Recommendations
+
+                        </span>
 
                     </div>
 
@@ -89,7 +170,11 @@ function Login(){
 
                         <MdSecurity/>
 
-                        <span>PQC Readiness Assessment</span>
+                        <span>
+
+                            PQC Readiness Assessment
+
+                        </span>
 
                     </div>
 
@@ -97,7 +182,11 @@ function Login(){
 
                         <MdSecurity/>
 
-                        <span>Enterprise Security Dashboard</span>
+                        <span>
+
+                            Enterprise Security Dashboard
+
+                        </span>
 
                     </div>
 
@@ -130,6 +219,12 @@ function Login(){
 
                             placeholder="Email Address"
 
+                            value={email}
+
+                            onChange={(e)=>setEmail(e.target.value)}
+
+                            autoComplete="email"
+
                         />
 
                     </div>
@@ -144,15 +239,39 @@ function Login(){
 
                             placeholder="Password"
 
+                            value={password}
+
+                            onChange={(e)=>setPassword(e.target.value)}
+
+                            autoComplete="current-password"
+
                         />
 
                     </div>
+
+                    {
+
+                        error && (
+
+                            <p className="login-error">
+
+                                {error}
+
+                            </p>
+
+                        )
+
+                    }
 
                     <div className="login-options">
 
                         <label>
 
-                            <input type="checkbox"/>
+                            <input
+
+                                type="checkbox"
+
+                            />
 
                             Remember Me
 
@@ -172,11 +291,29 @@ function Login(){
 
                         onClick={handleLogin}
 
+                        disabled={loading}
+
                     >
 
-                        Sign In
+                        {
 
-                        <MdArrowForward/>
+                            loading
+
+                            ?
+
+                            "Signing In..."
+
+                            :
+
+                            <>
+
+                                Sign In
+
+                                <MdArrowForward/>
+
+                            </>
+
+                        }
 
                     </button>
 
@@ -195,8 +332,7 @@ function Login(){
                         </span>
 
                     </div>
-
-                </div>
+                                    </div>
 
             </div>
 

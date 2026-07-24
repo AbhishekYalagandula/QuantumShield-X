@@ -16,3 +16,32 @@ class User(Base):
     password = Column(String, nullable=False)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+# ==========================================
+# PROJECTS
+# ==========================================
+class Project(Base):
+    __tablename__ = "projects"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    project_name = Column(String, nullable=False)
+
+    original_filename = Column(String, nullable=False)
+
+    extracted_path = Column(String, nullable=False)
+
+    uploaded_by = Column(String, nullable=False)
+
+    risk_score = Column(Integer, default=0)
+
+    risk_level = Column(String, default="Low")
+
+    detected_algorithms = Column(Integer, default=0)
+
+    vulnerable_files = Column(Integer, default=0)
+
+    upload_time = Column(
+        DateTime(timezone=True),
+        server_default=func.now()
+    )

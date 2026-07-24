@@ -1,66 +1,49 @@
-def generate_migration_plan(analysis):
-    migration_plan = []
+# app/services/migration_planner_service.py
 
-    for file_data in analysis:
-        file_plan = {
-            "file": file_data["file"],
-            "migrations": []
-        }
+def generate_migration_plan(recommendations):
 
-        for algo in file_data["algorithms"]:
+    plan = []
 
-            if algo["name"] == "RSA":
-                migration = {
-                    "algorithm": "RSA",
-                    "replace_with": "CRYSTALS-Kyber",
-                    "difficulty": "Medium",
-                    "estimated_time": "2 Days",
-                    "why": "RSA is vulnerable to Shor's Algorithm on quantum computers.",
-                    "sample_code": "Use liboqs Kyber API instead of RSA."
-                }
+    for item in recommendations:
 
-            elif algo["name"] == "SHA-1":
-                migration = {
-                    "algorithm": "SHA-1",
-                    "replace_with": "SHA-3",
-                    "difficulty": "Easy",
-                    "estimated_time": "30 Minutes",
-                    "why": "SHA-1 has known collision attacks.",
-                    "sample_code": "Replace SHA1() with SHA3_256()."
-                }
+        if item["algorithm"] == "RSA":
 
-            elif algo["name"] == "AES":
-                migration = {
-                    "algorithm": "AES",
-                    "replace_with": "AES-256",
-                    "difficulty": "Easy",
-                    "estimated_time": "15 Minutes",
-                    "why": "AES-256 provides stronger security against future attacks.",
-                    "sample_code": "Increase AES key size to 256 bits."
-                }
+            estimated = "3-5 Days"
 
-            elif algo["name"] == "TLS":
-                migration = {
-                    "algorithm": "TLS",
-                    "replace_with": "PQC-enabled TLS",
-                    "difficulty": "Hard",
-                    "estimated_time": "5 Days",
-                    "why": "Current TLS key exchange may become vulnerable to quantum attacks.",
-                    "sample_code": "Use hybrid Kyber + TLS handshake."
-                }
+        elif item["algorithm"] in ["ECC", "ECDSA"]:
 
-            else:
-                migration = {
-                    "algorithm": algo["name"],
-                    "replace_with": "Unknown",
-                    "difficulty": "Unknown",
-                    "estimated_time": "Unknown",
-                    "why": "No migration available.",
-                    "sample_code": ""
-                }
+            estimated = "2-4 Days"
 
-            file_plan["migrations"].append(migration)
+        elif item["algorithm"] == "SHA-1":
 
-        migration_plan.append(file_plan)
+            estimated = "1 Day"
 
-    return migration_plan
+        elif item["algorithm"] == "DES":
+
+            estimated = "1 Day"
+
+        elif item["algorithm"] == "MD5":
+
+            estimated = "1 Day"
+
+        else:
+
+            estimated = "2 Days"
+
+        plan.append({
+
+            "algorithm": item["algorithm"],
+
+            "replace_with": item["replace_with"],
+
+            "priority": item["priority"],
+
+            "difficulty": item["difficulty"],
+
+            "estimated_time": estimated,
+
+            "status": "Pending"
+
+        })
+
+    return plan

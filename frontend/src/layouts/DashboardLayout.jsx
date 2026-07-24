@@ -1,7 +1,8 @@
 import "./DashboardLayout.css";
 
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
+
 
 function DashboardLayout({ children }) {
 

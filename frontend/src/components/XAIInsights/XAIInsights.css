@@ -1,0 +1,41 @@
+.xai-card{
+
+    background:#132445;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    color:white;
+
+}
+
+.xai-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    margin-top:20px;
+
+}
+
+.xai-item{
+
+    background:#1d335d;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    border-left:5px solid #6C63FF;
+
+}
+
+.xai-item h3{
+
+    margin-bottom:10px;
+
+}

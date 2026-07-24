@@ -6,12 +6,20 @@ import Navbar from "../components/Navbar/Navbar";
 import {
     MdCloudUpload,
     MdInsertDriveFile,
-    MdClose
+    MdClose,
+    MdInfo,
+    MdArrowForward
 } from "react-icons/md";
+
+import axios from "axios";
 
 function Upload() {
 
     const [selectedFile, setSelectedFile] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+
+const [result, setResult] = useState(null);
 
     const [dragActive, setDragActive] = useState(false);
 
@@ -62,6 +70,53 @@ function Upload() {
         setSelectedFile(null);
 
     };
+    const uploadProject = async () => {
+
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+
+    formData.append("file", selectedFile);
+
+    try {
+
+        setLoading(true);
+
+        const response = await axios.post(
+
+            "http://127.0.0.1:8000/upload",
+
+            formData,
+
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+
+        );
+
+        setResult(response.data);
+
+        alert("Project uploaded successfully!");
+
+    }
+
+    catch (err) {
+
+        console.log(err);
+
+        alert("Upload Failed");
+
+    }
+
+    finally {
+
+        setLoading(false);
+
+    }
+
+};
 
     return (
 
@@ -221,14 +276,12 @@ function Upload() {
                     </div>
 
                     <button
+className="upload-scan-btn"
+disabled={!selectedFile || loading}
+onClick={uploadProject}
+>
 
-                        className="upload-scan-btn"
-
-                        disabled={!selectedFile}
-
-                    >
-
-                        Upload & Scan
+                       {loading ? "Scanning..." : "Upload & Scan"}
 
                         <MdArrowForward/>
 

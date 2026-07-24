@@ -1,26 +1,45 @@
 import "./AIRecommendation.css";
 
+import { useState, useEffect } from "react";
+
 import Navbar from "../components/Navbar/Navbar";
 
 import {
-
     MdAutoAwesome,
-
     MdPsychology,
-
     MdCheckCircle,
-
     MdArrowForward
-
 } from "react-icons/md";
 
-function AIRecommendation(){
+function AIRecommendation() {
 
-    return(
+    const [recommendations, setRecommendations] = useState([]);
+
+    useEffect(() => {
+
+        fetch("http://127.0.0.1:8000/recommendation/")
+
+            .then((res) => res.json())
+
+            .then((data) => {
+
+                setRecommendations(data);
+
+            })
+
+            .catch((err) => {
+
+                console.log(err);
+
+            });
+
+    }, []);
+
+    return (
 
         <>
 
-            <Navbar/>
+            <Navbar />
 
             <main className="recommendation-page">
 
@@ -46,7 +65,7 @@ function AIRecommendation(){
 
                         <div className="recommendation-icon">
 
-                            <MdAutoAwesome/>
+                            <MdAutoAwesome />
 
                         </div>
 
@@ -70,92 +89,50 @@ function AIRecommendation(){
 
                     <div className="recommendation-grid">
 
-                        <div className="recommend-box">
+                        {
 
-                            <MdPsychology className="recommend-icon"/>
+                            recommendations.length > 0 ?
 
-                            <div>
+                                recommendations.map((item, index) => (
 
-                                <h3>
+                                    <div
+                                        className="recommend-box"
+                                        key={index}
+                                    >
 
-                                    Replace RSA
+                                        <MdPsychology className="recommend-icon" />
 
-                                </h3>
+                                        <div>
 
-                                <p>
+                                            <h3>
 
-                                    ML-KEM (CRYSTALS-Kyber)
+                                                Replace {item.algorithm}
 
-                                </p>
+                                            </h3>
 
-                            </div>
+                                            <p>
 
-                        </div>
+                                                {item.replace_with}
 
-                        <div className="recommend-box">
+                                            </p>
 
-                            <MdPsychology className="recommend-icon"/>
+                                            <small>
 
-                            <div>
+                                                Priority : {item.priority}
 
-                                <h3>
+                                            </small>
 
-                                    Replace ECDSA
+                                        </div>
 
-                                </h3>
+                                    </div>
 
-                                <p>
+                                ))
 
-                                    ML-DSA (Dilithium)
+                                :
 
-                                </p>
+                                <p>No recommendations available.</p>
 
-                            </div>
-
-                        </div>
-                                                <div className="recommend-box">
-
-                            <MdCheckCircle className="recommend-icon success"/>
-
-                            <div>
-
-                                <h3>
-
-                                    Migration Priority
-
-                                </h3>
-
-                                <p>
-
-                                    High
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div className="recommend-box">
-
-                            <MdArrowForward className="recommend-icon"/>
-
-                            <div>
-
-                                <h3>
-
-                                    Estimated Time
-
-                                </h3>
-
-                                <p>
-
-                                    3 - 5 Days
-
-                                </p>
-
-                            </div>
-
-                        </div>
+                        }
 
                     </div>
 
@@ -169,7 +146,7 @@ function AIRecommendation(){
 
                         <p>
 
-                            QuantumShield-X AI analyzed the uploaded project and found RSA-2048 and ECDSA implementations. These algorithms are vulnerable to quantum attacks using Shor's Algorithm. The AI recommends migrating to ML-KEM (CRYSTALS-Kyber) for key encapsulation and ML-DSA (Dilithium) for digital signatures. This migration will significantly improve long-term cryptographic security.
+                            QuantumShield-X AI analyzed the uploaded project and generated migration recommendations based on the detected cryptographic algorithms. The recommendations follow NIST Post-Quantum Cryptography standards.
 
                         </p>
 
@@ -208,7 +185,8 @@ function AIRecommendation(){
                             </h1>
 
                         </div>
-                                                <div className="summary-card">
+
+                        <div className="summary-card">
 
                             <h3>
 
@@ -232,7 +210,7 @@ function AIRecommendation(){
 
                             Continue to Migration Planner
 
-                            <MdArrowForward/>
+                            <MdArrowForward />
 
                         </button>
 

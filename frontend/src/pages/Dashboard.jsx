@@ -1,32 +1,107 @@
 import "./Dashboard.css";
 
-import Navbar from "../components/Navbar/Navbar";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+import DashboardLayout from "../layouts/DashboardLayout";
+
+import QuantumCircuitViewer
+from "../components/QuantumCircuitViewer/QuantumCircuitViewer";
+
 import StatsCard from "../components/StatsCard/StatsCard";
 import RiskGauge from "../components/RiskGauge/RiskGauge";
 import RiskTrend from "../components/RiskTrend/RiskTrend";
 import RecentScans from "../components/RecentScans/RecentScans";
 import QuickActions from "../components/QuickActions/QuickActions";
+import XAIInsights from "../components/XAIInsights/XAIInsights";
 
 import {
+
     MdFolder,
+
     MdWarning,
+
     MdSecurity,
+
     MdAnalytics
+
 } from "react-icons/md";
 
 function Dashboard(){
 
+    const [dashboardData,setDashboardData] = useState({
+
+        projects:0,
+
+        critical:0,
+
+        pqc:0,
+
+        today:0,
+
+        risk_score:0,
+
+        risk_level:"Loading..."
+
+    });
+
+    const [loading,setLoading] = useState(true);
+
+    const [error,setError] = useState("");
+
+    useEffect(()=>{
+
+        fetchDashboard();
+
+    },[]);
+
+    const fetchDashboard = async()=>{
+
+        try{
+
+            const token = localStorage.getItem("access_token");
+
+            const response = await axios.get(
+
+                "http://127.0.0.1:8000/dashboard/summary",
+
+                {
+
+                    headers:{
+
+                        Authorization:`Bearer ${token}`
+
+                    }
+
+                }
+
+            );
+
+            setDashboardData(response.data);
+
+        }
+
+        catch(err){
+
+            console.error(err);
+
+            setError("Unable to load dashboard.");
+
+        }
+
+        finally{
+
+            setLoading(false);
+
+        }
+
+    };
+
     return(
 
-        <>
-
-            <Navbar/>
+        <DashboardLayout>
 
             <main className="dashboard">
-
-                {/* ==========================
-                        PAGE HEADER
-                ========================== */}
 
                 <section className="dashboard-header">
 
@@ -47,119 +122,175 @@ function Dashboard(){
                     </div>
 
                 </section>
+                                {
 
-                {/* ==========================
-                        STATS
-                ========================== */}
+                    loading ?
 
-                <section className="stats-grid">
+                    (
 
-                    <StatsCard
+                        <div className="dashboard-loading">
 
-                        icon={<MdFolder/>}
+                            <h2>
 
-                        title="Projects"
+                                Loading Dashboard...
 
-                        value="26"
+                            </h2>
 
-                        change="+5"
+                        </div>
 
-                        positive={true}
+                    )
 
-                    />
+                    :
 
-                    <StatsCard
+                    error ?
 
-                        icon={<MdWarning/>}
+                    (
 
-                        title="Critical Risks"
+                        <div className="dashboard-error">
 
-                        value="8"
+                            <h2>
 
-                        change="-2"
+                                {error}
 
-                        positive={false}
+                            </h2>
 
-                    />
+                        </div>
 
-                    <StatsCard
+                    )
 
-                        icon={<MdSecurity/>}
+                    :
 
-                        title="PQC Ready"
+                    (
 
-                        value="74%"
+                        <>
 
-                        change="+12%"
+                            {/* ==========================
+                                    STATS
+                            ========================== */}
 
-                        positive={true}
+                            <section className="stats-grid">
 
-                    />
+                                <StatsCard
 
-                    <StatsCard
+                                    icon={<MdFolder/>}
 
-                        icon={<MdAnalytics/>}
+                                    title="Projects"
 
-                        title="Today's Scans"
+                                    value={dashboardData.projects}
 
-                        value="41"
+                                    change="+0"
 
-                        change="+9"
+                                    positive={true}
 
-                        positive={true}
+                                />
 
-                    />
+                                <StatsCard
 
-                </section>
-                                {/* ==========================
-                        ANALYTICS
-                ========================== */}
+                                    icon={<MdWarning/>}
 
-                <section className="analytics-grid">
+                                    title="Critical Risks"
 
-                    <div className="analytics-left">
+                                    value={dashboardData.critical}
 
-                        <RiskGauge
+                                    change="-0"
 
-                            score={74}
+                                    positive={false}
 
-                            risk="Medium"
+                                />
 
-                        />
+                                <StatsCard
 
-                    </div>
+                                    icon={<MdSecurity/>}
 
-                    <div className="analytics-right">
+                                    title="PQC Ready"
 
-                        <RiskTrend/>
+                                    value={`${dashboardData.pqc}%`}
 
-                    </div>
+                                    change="+0%"
 
-                </section>
+                                    positive={true}
 
-                {/* ==========================
-                        BOTTOM GRID
-                ========================== */}
+                                />
 
-                <section className="bottom-grid">
+                                <StatsCard
 
-                    <div className="bottom-left">
+                                    icon={<MdAnalytics/>}
 
-                        <RecentScans/>
+                                    title="Today's Scans"
 
-                    </div>
+                                    value={dashboardData.today}
 
-                    <div className="bottom-right">
+                                    change="+0"
 
-                        <QuickActions/>
+                                    positive={true}
 
-                    </div>
+                                />
 
-                </section>
+                            </section>
+
+                            {/* ==========================
+                                    ANALYTICS
+                            ========================== */}
+
+                            <XAIInsights />
+
+                            <section className="analytics-grid">
+
+                                <div className="analytics-left">
+
+                                    <RiskGauge
+    score={dashboardData.risk_score}
+    risk={dashboardData.risk_level}
+    pqc={dashboardData.pqc}
+    vulnerable={dashboardData.vulnerable_algorithms}
+    migration={dashboardData.migration_progress}
+/>
+
+                                </div>
+
+                                <div className="analytics-right">
+
+                                    <RiskTrend/>
+
+                                </div>
+
+                            </section>
+
+                            <section className="quantum-section">
+
+    <QuantumCircuitViewer/>
+
+</section>
+
+                                                        {/* ==========================
+                                    BOTTOM GRID
+                            ========================== */}
+
+                            <section className="bottom-grid">
+
+                                <div className="bottom-left">
+
+                                    <RecentScans />
+
+                                </div>
+
+                                <div className="bottom-right">
+
+                                    <QuickActions />
+
+                                </div>
+
+                            </section>
+
+                        </>
+
+                    )
+
+                }
 
             </main>
 
-        </>
+        </DashboardLayout>
 
     );
 

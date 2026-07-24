@@ -1,66 +1,44 @@
 import "./RecentScans.css";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import {
-
     MdFolder,
-
     MdVisibility,
-
     MdWarning,
-
     MdCheckCircle
-
 } from "react-icons/md";
 
-const scans = [
+function RecentScans() {
 
-    {
+    const [scans, setScans] = useState([]);
 
-        id:1,
+    useEffect(() => {
 
-        project:"E-Commerce Backend",
+        loadRecentScans();
 
-        time:"2 mins ago",
+    }, []);
 
-        risk:"High",
+    const loadRecentScans = async () => {
 
-        algorithms:12
+        try {
 
-    },
+            const response = await axios.get(
+                "http://127.0.0.1:8000/dashboard/recent-scans"
+            );
 
-    {
+            setScans(response.data);
 
-        id:2,
+        } catch (error) {
 
-        project:"Hospital Management",
+            console.error(error);
 
-        time:"15 mins ago",
+        }
 
-        risk:"Medium",
+    };
 
-        algorithms:7
-
-    },
-
-    {
-
-        id:3,
-
-        project:"Banking API",
-
-        time:"42 mins ago",
-
-        risk:"Low",
-
-        algorithms:3
-
-    }
-
-];
-
-function RecentScans(){
-
-    return(
+    return (
 
         <div className="recent-card">
 
@@ -69,15 +47,11 @@ function RecentScans(){
                 <div>
 
                     <h2>
-
                         Recent Security Scans
-
                     </h2>
 
                     <p>
-
                         Latest analyzed software projects
-
                     </p>
 
                 </div>
@@ -90,24 +64,37 @@ function RecentScans(){
 
             </div>
 
-            <div className="recent-list">
-                            {
+           <div className="recent-list">
 
-                    scans.map((scan)=>(
+    {
+
+        scans.length === 0 ?
+
+        (
+
+            <div className="no-scans">
+
+                No Projects Scanned Yet
+
+            </div>
+
+        )
+
+        :
+
+        scans.map((scan) => (
+            
 
                         <div
-
                             className="scan-item"
-
                             key={scan.id}
-
                         >
 
                             <div className="scan-left">
 
                                 <div className="scan-icon">
 
-                                    <MdFolder/>
+                                    <MdFolder />
 
                                 </div>
 
@@ -115,13 +102,13 @@ function RecentScans(){
 
                                     <h3>
 
-                                        {scan.project}
+                                        {scan.project_name}
 
                                     </h3>
 
                                     <span>
 
-                                        {scan.time}
+                                        {new Date(scan.upload_time).toLocaleString()}
 
                                     </span>
 
@@ -133,9 +120,7 @@ function RecentScans(){
 
                                 <span className="algo-count">
 
-                                    {scan.algorithms}
-
-                                    {" "}Algorithms
+                                    Risk Score : {scan.risk_score}
 
                                 </span>
 
@@ -144,36 +129,34 @@ function RecentScans(){
                             <div className="scan-right">
 
                                 <span
-
-                                    className={`risk-badge ${scan.risk.toLowerCase()}`}
-
+                                    className={`risk-badge ${scan.risk_level.toLowerCase()}`}
                                 >
 
                                     {
 
-                                        scan.risk==="High"
+                                        scan.risk_level === "Critical" ||
 
-                                        ?
+                                        scan.risk_level === "High"
 
-                                        <MdWarning/>
+                                            ?
 
-                                        :
+                                            <MdWarning />
 
-                                        <MdCheckCircle/>
+                                            :
+
+                                            <MdCheckCircle />
 
                                     }
 
-                                    {scan.risk}
+                                    {scan.risk_level}
 
                                 </span>
 
                                 <button
-
                                     className="view-btn"
-
                                 >
 
-                                    <MdVisibility/>
+                                    <MdVisibility />
 
                                 </button>
 
@@ -186,7 +169,8 @@ function RecentScans(){
                 }
 
             </div>
-                        <div className="recent-footer">
+
+            <div className="recent-footer">
 
                 <span>
 

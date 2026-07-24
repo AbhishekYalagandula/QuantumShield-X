@@ -14,7 +14,39 @@ import {
 
 } from "react-icons/md";
 
+import { useEffect, useState } from "react";
+
 function MigrationPlanner(){
+
+    const [migrationPlan, setMigrationPlan] = useState([]);
+
+useEffect(() => {
+
+    const downloadReport = () => {
+
+    window.open(
+
+        "http://127.0.0.1:8000/report/latest_report.txt",
+
+        "_blank"
+
+    );
+
+};
+
+    fetch("http://127.0.0.1:8000/migration/")
+
+        .then(res => res.json())
+
+        .then(data => {
+
+            setMigrationPlan(data);
+
+        })
+
+        .catch(err => console.log(err));
+
+}, []);
 
     return(
 
@@ -70,94 +102,62 @@ function MigrationPlanner(){
 
                     <div className="migration-grid">
 
-                        <div className="migration-item">
+{
 
-                            <MdSwapHoriz className="migration-item-icon"/>
+migrationPlan.map((item,index)=>(
 
-                            <div>
+<div
+className="migration-item"
+key={index}
+>
 
-                                <h3>
+<MdSwapHoriz className="migration-item-icon"/>
 
-                                    RSA-2048
+<div>
 
-                                </h3>
+<h3>
 
-                                <p>
+{item.algorithm}
 
-                                    → ML-KEM (CRYSTALS-Kyber)
+</h3>
 
-                                </p>
+<p>
 
-                            </div>
+→ {item.replace_with}
 
-                        </div>
+</p>
 
-                        <div className="migration-item">
+<small>
 
-                            <MdSwapHoriz className="migration-item-icon"/>
+Priority : {item.priority}
 
-                            <div>
+</small>
 
-                                <h3>
+<br/>
 
-                                    ECDSA
+<small>
 
-                                </h3>
+Difficulty : {item.difficulty}
 
-                                <p>
+</small>
 
-                                    → ML-DSA (Dilithium)
+<br/>
 
-                                </p>
+<small>
 
-                            </div>
+Time : {item.estimated_time}
 
-                        </div>
+</small>
 
-                        <div className="migration-item">
+</div>
 
-                            <MdTrendingUp className="migration-item-icon"/>
+</div>
 
-                            <div>
+))
 
-                                <h3>
+}
 
-                                    Migration Priority
-
-                                </h3>
-
-                                <p>
-
-                                    High
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div className="migration-item">
-
-                            <MdSchedule className="migration-item-icon"/>
-
-                            <div>
-
-                                <h3>
-
-                                    Estimated Time
-
-                                </h3>
-
-                                <p>
-
-                                    5 Working Days
-
-                                </p>
-
-                            </div>
-
-                        </div>
-                        </div>
+</div>
 
                                                 <div className="planner-section">
 
@@ -263,7 +263,7 @@ function MigrationPlanner(){
 
                                     style={{
 
-                                        width:"41%"
+                                        width:`${Math.min(migrationPlan.length*20,100)}%`
 
                                     }}
 
@@ -290,11 +290,9 @@ function MigrationPlanner(){
 
                             </h3>
 
-                            <h1>
-
-                                12
-
-                            </h1>
+                           <h1>
+    {migrationPlan.length}
+</h1>
 
                         </div>
 
@@ -305,12 +303,13 @@ function MigrationPlanner(){
                                 Estimated Duration
 
                             </h3>
-
-                            <h1>
-
-                                5 Days
-
-                            </h1>
+<h1>
+    {
+        migrationPlan.length > 0
+        ? migrationPlan[0].estimated_time
+        : "-"
+    }
+</h1>
 
                         </div>
 
@@ -323,10 +322,12 @@ function MigrationPlanner(){
                             </h3>
 
                             <h1>
-
-                                In Progress
-
-                            </h1>
+    {
+        migrationPlan.length > 0
+        ? migrationPlan[0].status
+        : "-"
+    }
+</h1>
 
                         </div>
 
@@ -334,11 +335,17 @@ function MigrationPlanner(){
 
                     <div className="planner-footer">
 
-                        <button className="planner-btn">
+                        <button
 
-                            Generate Migration Report
+    className="planner-btn"
 
-                        </button>
+    onClick={downloadReport}
+
+>
+
+    Generate Migration Report
+
+</button>
 
                     </div>
 

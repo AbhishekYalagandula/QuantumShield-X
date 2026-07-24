@@ -10,16 +10,41 @@ import {
   Tooltip,
 } from "recharts";
 
-const riskData = [
-  { month: "Jan", risk: 82 },
-  { month: "Feb", risk: 76 },
-  { month: "Mar", risk: 70 },
-  { month: "Apr", risk: 67 },
-  { month: "May", risk: 61 },
-  { month: "Jun", risk: 55 },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function RiskTrend() {
+
+  const [riskData, setRiskData] = useState([]);
+
+useEffect(() => {
+
+    loadTrend();
+
+}, []);
+
+const loadTrend = async () => {
+
+    try{
+
+        const response = await axios.get(
+
+            "http://127.0.0.1:8000/dashboard/risk-trend"
+
+        );
+
+        setRiskData(response.data);
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+};
+
   return (
     <div className="risk-trend-card">
       <div className="trend-header">
