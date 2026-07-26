@@ -4,6 +4,8 @@ from datetime import date
 
 from app.database.models import Project
 
+from collections import Counter
+
 # ==========================================
 # RECENT SCANS
 # ==========================================
@@ -132,3 +134,57 @@ def get_risk_trend(db):
         })
 
     return trend
+
+# ==========================================
+# TOP VULNERABLE ALGORITHMS
+# ==========================================
+
+def get_top_algorithms(db: Session):
+
+    projects = db.query(Project).all()
+
+    counter = Counter()
+
+    for project in projects:
+
+        # detected_algorithms should contain values like:
+        # RSA,SHA-1,ECC
+
+        if project.detected_algorithms:
+
+            algorithms = project.detected_algorithms.split(",")
+
+            for algo in algorithms:
+
+                algo = algo.strip()
+
+                if algo:
+
+                    counter[algo] += 1
+
+    return [
+
+        {
+            "algorithm": name,
+            "count": count
+        }
+
+        for name, count in counter.most_common()
+
+    ]
+
+# ==========================================
+# COMPLETE DASHBOARD
+# ==========================================
+
+def get_complete_dashboard(db: Session):
+
+    return {
+
+        "summary": get_dashboard_summary(db),
+
+        "recent_scans": get_recent_scans(db),
+
+        "risk_trend": get_risk_trend(db)
+
+    }

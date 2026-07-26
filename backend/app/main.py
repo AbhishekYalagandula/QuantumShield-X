@@ -14,9 +14,12 @@ from app.routes import migration_planner
 from app.routes import report
 from app.routes import certificate
 from app.routes import xai
-from app.routes.report import router as report_router
 
 from fastapi.staticfiles import StaticFiles
+
+from app.routes.project import router as project_router
+
+from app.routes.audit import router as audit_router
 
 # ==========================================
 # CREATE DATABASE TABLES
@@ -82,7 +85,15 @@ app.include_router(certificate.router)
 
 app.include_router(xai.router)
 
-app.include_router(report_router)
+app.include_router(project_router)
+
+app.include_router(audit_router)
+
+app.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
+)
 
 # ==========================================
 # HOME
@@ -100,8 +111,3 @@ def home():
         "version": "1.0.0"
 
     }
-app.mount(
-    "/static",
-    StaticFiles(directory="app/static"),
-    name="static"
-)

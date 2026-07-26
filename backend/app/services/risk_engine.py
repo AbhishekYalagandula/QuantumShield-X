@@ -1,35 +1,25 @@
 from app.quantum.quantum_engine import quantum_risk_analysis
-
 from app.qml.predictor import predict_project
-
 from app.xqai.explainability import generate_xqai_explanation
 
 
 def calculate_quantum_risk(analysis, project_name):
     """
-    Calculate the overall quantum risk using the Qiskit pipeline.
+    Calculate the overall quantum risk using the QuantumShield-X pipeline.
     """
 
-    # -----------------------------------
-    # Run Quantum Pipeline
-    # -----------------------------------
+    # =====================================
+    # STEP 1 - Run Quantum Pipeline
+    # =====================================
 
     quantum_result = quantum_risk_analysis(
         analysis,
         project_name
     )
-    # -----------------------------------
-# Explainable Quantum AI
-# -----------------------------------
 
-    xqai = generate_xqai_explanation(
-    analysis,
-    quantum_result["qml_prediction"]
-)
-
-    # -----------------------------------
-# Quantum ML Prediction
-# -----------------------------------
+    # =====================================
+    # STEP 2 - Quantum Machine Learning Prediction
+    # =====================================
 
     qml_prediction = predict_project(analysis)
 
@@ -37,14 +27,27 @@ def calculate_quantum_risk(analysis, project_name):
     print(qml_prediction)
     print("====================================\n")
 
+    # =====================================
+    # STEP 3 - Explainable Quantum AI
+    # =====================================
+
+    xqai = generate_xqai_explanation(
+        analysis,
+        qml_prediction
+    )
+
+    # =====================================
+    # STEP 4 - Extract Quantum Risk
+    # =====================================
+
     score = quantum_result["score"]
     level = quantum_result["level"]
 
-    # -----------------------------------
-    # Count detected algorithms
-    # -----------------------------------
+    # =====================================
+    # STEP 5 - Count Algorithms
+    # =====================================
 
-    detected = set()
+    detected_algorithms = set()
 
     vulnerable_files = len(analysis)
 
@@ -52,11 +55,11 @@ def calculate_quantum_risk(analysis, project_name):
 
         for algo in file["algorithms"]:
 
-            detected.add(algo["name"])
+            detected_algorithms.add(algo["name"])
 
-    # -----------------------------------
-    # Return Result
-    # -----------------------------------
+    # =====================================
+    # STEP 6 - Return Final Result
+    # =====================================
 
     return {
 
@@ -64,7 +67,7 @@ def calculate_quantum_risk(analysis, project_name):
 
         "level": level,
 
-        "detected": len(detected),
+        "detected": len(detected_algorithms),
 
         "files": vulnerable_files,
 
@@ -74,9 +77,9 @@ def calculate_quantum_risk(analysis, project_name):
 
         "circuit_image": quantum_result["circuit_image"],
 
-        "qml_prediction": qml_prediction,
+        "metadata": quantum_result["metadata"],
 
-        "qml_prediction": xqai["qml_prediction"],
+        "qml_prediction": qml_prediction,
 
         "confidence": xqai["confidence"],
 

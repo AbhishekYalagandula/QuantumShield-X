@@ -6,7 +6,8 @@ from app.database.database import get_db
 from app.database.dashboard_crud import (
     get_dashboard_summary,
     get_recent_scans,
-    get_risk_trend
+    get_risk_trend,
+    get_complete_dashboard
 )
 
 router = APIRouter(
@@ -34,3 +35,16 @@ def risk_trend(
     db: Session = Depends(get_db)
 ):
     return get_risk_trend(db)
+
+@router.get("/")
+def complete_dashboard(
+    db: Session = Depends(get_db)
+):
+
+    return {
+
+        "status": "success",
+
+        "dashboard": get_complete_dashboard(db)
+
+    }

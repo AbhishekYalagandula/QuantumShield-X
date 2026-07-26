@@ -110,6 +110,26 @@ def save_uploaded_file(file, db: Session):
     risk_data
 )
 
+# =====================================
+# Collect Algorithm Names
+# =====================================
+
+        algorithm_names = []
+
+        for file in analysis:
+
+            for algo in file["algorithms"]:
+                     
+                             algorithm_names.append(algo["name"])
+                     
+
+          
+
+   
+        algorithm_names = sorted(set(algorithm_names))
+
+        algorithm_string = ",".join(algorithm_names)
+
         # Save Project into SQLite
         project = create_project(
             db=db,
@@ -119,8 +139,8 @@ def save_uploaded_file(file, db: Session):
             uploaded_by="demo@quantumshieldx.com",
             risk_score=risk_data["score"],
             risk_level=risk_data["level"],
-            detected_algorithms=risk_data["detected"],
             vulnerable_files=risk_data["files"],
+            detected_algorithms=algorithm_string,
             report_path=report
         )
 
@@ -152,7 +172,7 @@ def save_uploaded_file(file, db: Session):
 
         "explanations": risk_data["explanations"],
 
-        "quantum_circuit": risk_data["circuit_image"],
+        "quantum_circuit": f"http://127.0.0.1:8000/static/circuits/{os.path.basename(risk_data['circuit_image'])}",
 
         "detected_algorithms": risk_data["detected"],
 
