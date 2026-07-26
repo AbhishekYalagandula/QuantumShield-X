@@ -14,6 +14,7 @@ from app.routes import migration_planner
 from app.routes import report
 from app.routes import certificate
 from app.routes import xai
+from app.routes.report import router as report_router
 
 from fastapi.staticfiles import StaticFiles
 
@@ -80,6 +81,8 @@ app.include_router(report.router)
 app.include_router(certificate.router)
 
 app.include_router(xai.router)
+
+app.include_router(report_router)
 
 # ==========================================
 # HOME

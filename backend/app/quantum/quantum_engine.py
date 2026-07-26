@@ -1,9 +1,13 @@
 from app.quantum.feature_encoder import encode_features
 from app.quantum.quantum_circuit import build_quantum_circuit
 from app.quantum.quantum_classifier import execute_quantum_circuit
+from app.services.quantum_metadata import generate_quantum_metadata
 
 
-def quantum_risk_analysis(analysis):
+def quantum_risk_analysis(
+    analysis,
+    project_name
+):
     """
     Complete Quantum Pipeline
     """
@@ -25,17 +29,33 @@ def quantum_risk_analysis(analysis):
     # STEP 2 - Build Quantum Circuit
     # =====================================
 
-    circuit = build_quantum_circuit(features)
+    circuit, image_path = build_quantum_circuit(
+    features,
+    filename=project_name
+)
 
     # =====================================
     # STEP 3 - Execute Circuit
     # =====================================
 
-    counts = execute_quantum_circuit(circuit)
+    counts, execution_time = execute_quantum_circuit(circuit)
 
     print("\n========== QUANTUM COUNTS ==========")
     print(counts)
     print("====================================\n")
+
+    metadata = generate_quantum_metadata(
+    circuit,
+    execution_time
+)
+
+    print("\n========== QUANTUM METADATA ==========")
+
+    for key, value in metadata.items():
+        print(f"{key}: {value}")
+    
+
+    print("======================================\n")
 
     # =====================================
     # STEP 4 - Calculate Quantum Risk Score
@@ -79,8 +99,10 @@ def quantum_risk_analysis(analysis):
     # =====================================
 
     return {
-        "score": score,
-        "level": level,
-        "counts": counts,
-        "features": features
-    }
+    "score": score,
+    "level": level,
+    "counts": counts,
+    "features": features,
+    "circuit_image": image_path,
+    "metadata": metadata
+}

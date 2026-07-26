@@ -41,6 +41,8 @@ class Project(Base):
 
     vulnerable_files = Column(Integer, default=0)
 
+    report_path = Column(String, nullable=True)
+
     upload_time = Column(
         DateTime(timezone=True),
         server_default=func.now()

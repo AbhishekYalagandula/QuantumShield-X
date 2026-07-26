@@ -1,21 +1,21 @@
 from qiskit import QuantumCircuit
+
 import os
 import matplotlib.pyplot as plt
 
+import matplotlib
+matplotlib.use("Agg")
 
-def build_quantum_circuit(features):
+def build_quantum_circuit(features, filename="latest"):
     """
-    Build a quantum circuit from encoded features.
+    Build a quantum circuit and save its image.
     """
-
-    # ------------------------------------
-    # Number of qubits
-    # ------------------------------------
 
     num_qubits = len(features)
 
     if num_qubits == 0:
         num_qubits = 1
+
         features = [
             {
                 "algorithm": "None",
@@ -24,39 +24,33 @@ def build_quantum_circuit(features):
             }
         ]
 
-    # ------------------------------------
-    # Create Quantum Circuit
-    # ------------------------------------
-
     qc = QuantumCircuit(num_qubits, num_qubits)
 
-    # ------------------------------------
+    # -------------------------
     # Encode Features
-    # ------------------------------------
+    # -------------------------
 
     for index, feature in enumerate(features):
 
-        theta = feature["theta"]
+        qc.ry(feature["theta"], index)
 
-        qc.ry(theta, index)
-
-    # ------------------------------------
-    # Entangle Qubits
-    # ------------------------------------
+    # -------------------------
+    # Entangle
+    # -------------------------
 
     for i in range(num_qubits - 1):
 
         qc.cx(i, i + 1)
 
-    # ------------------------------------
+    # -------------------------
     # Measurement
-    # ------------------------------------
+    # -------------------------
 
     qc.measure(range(num_qubits), range(num_qubits))
 
-    # ------------------------------------
-    # Save Quantum Circuit Image
-    # ------------------------------------
+    # -------------------------
+    # Save Circuit Image
+    # -------------------------
 
     output_folder = "app/static/circuits"
 
@@ -64,7 +58,7 @@ def build_quantum_circuit(features):
 
     image_path = os.path.join(
         output_folder,
-        "latest_circuit.png"
+        f"{filename}.png"
     )
 
     figure = qc.draw(output="mpl")
@@ -73,8 +67,4 @@ def build_quantum_circuit(features):
 
     plt.close(figure)
 
-    # ------------------------------------
-    # Return Circuit
-    # ------------------------------------
-
-    return qc
+    return qc, image_path

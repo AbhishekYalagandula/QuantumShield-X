@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
+
 import os
 
 router = APIRouter(
@@ -8,22 +9,22 @@ router = APIRouter(
 )
 
 
-@router.get("/{filename}")
-def download_report(filename: str):
+@router.get("/download")
+def download_report(path: str):
 
-    report_path = os.path.join(
-        "app",
-        "reports",
-        filename
-    )
+    if not os.path.exists(path):
 
-    if not os.path.exists(report_path):
-        return {
-            "error": "Report not found"
-        }
+        raise HTTPException(
+            status_code=404,
+            detail="Report not found"
+        )
 
     return FileResponse(
-        path=report_path,
-        filename=filename,
-        media_type="text/plain"
+
+        path,
+
+        media_type="application/pdf",
+
+        filename=os.path.basename(path)
+
     )

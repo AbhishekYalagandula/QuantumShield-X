@@ -14,6 +14,8 @@ from app.services.report_service import generate_report
 
 from app.database.project_crud import create_project
 
+from app.benchmark.benchmark_engine import generate_quantum_benchmark
+
 # =====================================================
 # STORE LATEST ANALYSIS (used by dashboard/pages)
 # =====================================================
@@ -86,13 +88,27 @@ def save_uploaded_file(file, db: Session):
         latest_analysis = analysis
 
         # Calculate Risk Score
-        risk_data = calculate_quantum_risk(analysis)
+        risk_data = calculate_quantum_risk(
+    analysis,
+    project_name
+)
 
         # AI Recommendations
         recommendations = generate_ai_recommendation(analysis)
 
         # Migration Planner
         migration_plan = generate_migration_plan(recommendations)
+
+        benchmark = generate_quantum_benchmark(risk_data)
+
+        risk_data["benchmark"] = benchmark
+
+        report = generate_report(
+    project_name,
+    analysis,
+    migration_plan,
+    risk_data
+)
 
         # Save Project into SQLite
         project = create_project(
@@ -104,15 +120,11 @@ def save_uploaded_file(file, db: Session):
             risk_score=risk_data["score"],
             risk_level=risk_data["level"],
             detected_algorithms=risk_data["detected"],
-            vulnerable_files=risk_data["files"]
+            vulnerable_files=risk_data["files"],
+            report_path=report
         )
 
-        # Generate Report
-        report = generate_report(
-            filename,
-            analysis,
-            migration_plan
-        )
+      
 
     # =====================================================
     # RESPONSE
@@ -132,6 +144,16 @@ def save_uploaded_file(file, db: Session):
 
         "risk_level": risk_data["level"],
 
+        "qml_prediction": risk_data["qml_prediction"],
+
+        "confidence": risk_data["confidence"],
+
+        "feature_importance": risk_data["feature_importance"],
+
+        "explanations": risk_data["explanations"],
+
+        "quantum_circuit": risk_data["circuit_image"],
+
         "detected_algorithms": risk_data["detected"],
 
         "vulnerable_files": risk_data["files"],
@@ -141,6 +163,8 @@ def save_uploaded_file(file, db: Session):
         "recommendations": recommendations,
 
         "migration_plan": migration_plan,
+
+        "benchmark": benchmark,
 
         "report": report,
 

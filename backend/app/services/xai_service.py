@@ -75,5 +75,37 @@ def generate_xai(analysis):
                 "confidence": confidence
 
             })
+def generate_decision_trace(risk_data):
+
+    trace = []
+
+    trace.append(
+        f"Final Quantum Risk Score : {risk_data['score']}/100"
+    )
+
+    trace.append(
+        f"Overall Risk Level : {risk_data['level']}"
+    )
+
+    trace.append("")
+
+    trace.append("Top Contributing Algorithms:")
+
+    for feature in risk_data["feature_importance"]:
+
+        trace.append(
+            f"- {feature['algorithm']} : {feature['importance']}%"
+        )
+
+    trace.append("")
+    trace.append("Reasoning:")
+
+    for explanation in risk_data["explanations"]:
+
+        trace.append(
+            f"- {explanation}"
+        )
+
+    return trace            
 
     return explanations
