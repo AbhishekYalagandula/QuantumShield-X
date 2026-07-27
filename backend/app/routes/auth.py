@@ -14,6 +14,13 @@ from app.services.auth_service import (
 
 from app.core.security import create_access_token
 
+from fastapi import Request
+from types import SimpleNamespace
+
+from app.services.audit_service import log_action
+
+from app.security.rate_limiter import limiter
+
 
 router = APIRouter(
     prefix="/auth",
@@ -25,9 +32,15 @@ router = APIRouter(
 # REGISTER USER
 # ===========================
 @router.post("/register")
+@limiter.limit("5/minute")
 def register_user(
+
+    request: Request,
+
     user: UserRegister,
+
     db: Session = Depends(get_db)
+
 ):
     existing_user = get_user_by_email(db, user.email)
 
@@ -40,11 +53,12 @@ def register_user(
     hashed_password = hash_password(user.password)
 
     new_user = create_user(
-        db=db,
-        username=user.name,
-        email=user.email,
-        hashed_password=hashed_password
-    )
+    db=db,
+    username=user.name,
+    email=user.email,
+    hashed_password=hashed_password,
+    role=user.role
+)
 
     return {
         "message": "User registered successfully!",
@@ -57,7 +71,9 @@ def register_user(
 # LOGIN USER
 # ===========================
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit("10/minute")
 def login_user(
+    request: Request,
     user: LoginRequest,
     db: Session = Depends(get_db)
 ):
@@ -76,11 +92,24 @@ def login_user(
         )
 
     access_token = create_access_token(
-        data={
-            "sub": db_user.email,
-            "username": db_user.username
-        }
-    )
+    data={
+        "sub": db_user.email,
+        "username": db_user.username,
+        "role": db_user.role
+    }
+)
+
+    log_action(
+    db=db,
+    current_user=SimpleNamespace(
+        username=db_user.username,
+        email=db_user.email,
+        role=db_user.role
+    ),
+    action="LOGIN",
+    resource="QuantumShield-X",
+    ip_address=request.client.host
+)
 
     return {
         "access_token": access_token,

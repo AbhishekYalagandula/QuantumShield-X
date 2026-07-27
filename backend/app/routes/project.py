@@ -27,6 +27,8 @@ from app.auth.permissions import require_roles
 from fastapi import Request
 from app.services.audit_service import log_action
 
+from app.security.api_key import verify_api_key
+
 router = APIRouter(
     prefix="/projects",
     tags=["Projects"]
@@ -190,9 +192,12 @@ def statistics(
 
 @router.get("/dashboard/overview")
 def enterprise_dashboard(
-    db: Session = Depends(get_db)
-):
 
+    db: Session = Depends(get_db),
+
+    api_key: str = Depends(verify_api_key)
+
+):
     return get_enterprise_dashboard(db)
 
 
