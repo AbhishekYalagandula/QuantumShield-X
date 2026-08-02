@@ -334,7 +334,7 @@ npm run dev
 # 🖥️ Screenshots
 
 - 🏠 **Dashboard**
-- 
+  
   <img width="1913" height="902" alt="image" src="https://github.com/user-attachments/assets/0075cc2b-5183-42db-a3a3-8d4be0030e74" />
 
   <img width="1883" height="864" alt="image" src="https://github.com/user-attachments/assets/8afceb39-e29d-404e-98a4-6ec7164970d6" />
@@ -351,7 +351,7 @@ npm run dev
 
 - 🔍 **Scanner**
   
- <img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/8195bd2e-2144-46eb-80a3-4f421ab4824e" />
+  <img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/8195bd2e-2144-46eb-80a3-4f421ab4824e" />
 
 
 - 📊 **Risk Analysis**
@@ -365,7 +365,7 @@ npm run dev
   
 - 🔄 **Migration Planner**
   
- <img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/400e91e2-834a-4d53-a9ec-d4639898dd49" />
+  <img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/400e91e2-834a-4d53-a9ec-d4639898dd49" />
 
 - 📄 **PDF Report**
   
