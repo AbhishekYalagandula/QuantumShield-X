@@ -338,13 +338,32 @@ npm run dev
 
   <img width="1883" height="864" alt="image" src="https://github.com/user-attachments/assets/8afceb39-e29d-404e-98a4-6ec7164970d6" />
 
+  <img width="1868" height="883" alt="image" src="https://github.com/user-attachments/assets/d244460f-95a1-4420-bc08-4d86c8554eec" />
+
+
 
 - 📤 Upload Page
+  <img width="1911" height="894" alt="image" src="https://github.com/user-attachments/assets/f3e81e85-84ca-4294-8522-fd1a382b2f8c" />
+
+  
+
 - 🔍 Scanner
+ <img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/8195bd2e-2144-46eb-80a3-4f421ab4824e" />
+
+
 - 📊 Risk Analysis
+  <img width="1917" height="911" alt="image" src="https://github.com/user-attachments/assets/aea87547-1c62-42bb-a039-5631732392c8" />
+
 - 🧠 Explainable AI
+  <img width="1915" height="897" alt="image" src="https://github.com/user-attachments/assets/e7e529d9-a12d-452e-b9a3-ce30db68f61e" />
+
+  
 - 🔄 Migration Planner
+ <img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/400e91e2-834a-4d53-a9ec-d4639898dd49" />
+
 - 📄 PDF Report
+  <img width="1915" height="912" alt="image" src="https://github.com/user-attachments/assets/39cbf8ba-6b36-4935-96c0-717b10af8d86" />
+
 
 ---
 
