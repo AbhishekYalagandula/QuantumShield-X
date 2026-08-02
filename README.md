@@ -334,6 +334,8 @@ npm run dev
 # 🖥️ Screenshots
 
 - 🏠 Dashboard
+  <img width="1913" height="902" alt="image" src="https://github.com/user-attachments/assets/0075cc2b-5183-42db-a3a3-8d4be0030e74" />
+
 - 📤 Upload Page
 - 🔍 Scanner
 - 📊 Risk Analysis
@@ -366,7 +368,7 @@ npm run dev
 - 👨‍💻 Teja Vemavarapu
 - 👨‍💻 Mahesh Injarapu
 
-🏫 Dr. RVR & JC College of Engineering
+🏫 NRI Institute Of Technology
 
 ---
 
