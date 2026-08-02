@@ -336,6 +336,9 @@ npm run dev
 - 🏠 Dashboard
   <img width="1913" height="902" alt="image" src="https://github.com/user-attachments/assets/0075cc2b-5183-42db-a3a3-8d4be0030e74" />
 
+  <img width="1883" height="864" alt="image" src="https://github.com/user-attachments/assets/8afceb39-e29d-404e-98a4-6ec7164970d6" />
+
+
 - 📤 Upload Page
 - 🔍 Scanner
 - 📊 Risk Analysis
